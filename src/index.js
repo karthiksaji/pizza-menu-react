@@ -70,11 +70,11 @@ function Menu() {
   return (
     <main className="menu">
       <h2>OUR MENU</h2>
-      <div>
+      <ul className="pizzas">
         {pizzaData.map((pizza) => (
-          <Pizza pizzaObj={pizza} />
+          <Pizza pizzaObj={pizza} key={pizza.name} />
         ))}
-      </div>
+      </ul>
       {/* <Pizza
         name="Pizza Spinaci"
         ingredient="Tomato, mozarella, spinach, and ricotta cheese"
@@ -94,14 +94,14 @@ function Menu() {
 
 function Pizza(props) {
   return (
-    <div className="pizza">
+    <li className="pizza">
       <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
         <h2>{props.pizzaObj.name}</h2>
         <p>{props.pizzaObj.ingredients}</p>
         <span>{props.pizzaObj.price}</span>
       </div>
-    </div>
+    </li>
   );
 }
 
@@ -117,7 +117,16 @@ function Footer() {
 
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()}.© We are currently Open
+      {isOpen && (
+        <div className="order">
+          {
+            <p>
+              © We are open until {closehour} come visit us and order online.
+              <button className="btn">Order </button>
+            </p>
+          }
+        </div>
+      )}
     </footer>
   );
   // return React.createElement("footer", null, "© We are currently Open");
