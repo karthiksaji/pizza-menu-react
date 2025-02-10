@@ -70,7 +70,12 @@ function Menu() {
   return (
     <main className="menu">
       <h2>OUR MENU</h2>
-      <Pizza
+      <div>
+        {pizzaData.map((pizza) => (
+          <Pizza pizzaObj={pizza} />
+        ))}
+      </div>
+      {/* <Pizza
         name="Pizza Spinaci"
         ingredient="Tomato, mozarella, spinach, and ricotta cheese"
         photoName="pizzas/spinaci.jpg"
@@ -81,7 +86,7 @@ function Menu() {
         ingredient="Tomato, mozarella, mushrooms, and onion"
         photoName="pizzas/funghi.jpg"
         price={100}
-      />
+      /> */}
       );
     </main>
   );
@@ -90,11 +95,11 @@ function Menu() {
 function Pizza(props) {
   return (
     <div className="pizza">
-      <img src={props.photoName} alt={props.name} />
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
       <div>
-        <h2>{props.name}</h2>
-        <p>{props.ingredient}</p>
-        <span>{props.price + 3}</span>
+        <h2>{props.pizzaObj.name}</h2>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
       </div>
     </div>
   );
