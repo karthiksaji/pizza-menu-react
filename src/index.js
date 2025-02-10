@@ -119,12 +119,10 @@ function Footer() {
     <footer className="footer">
       {isOpen && (
         <div className="order">
-          {
-            <p>
-              © We are open until {closehour} come visit us and order online.
-              <button className="btn">Order </button>
-            </p>
-          }
+          <p>
+            © We are open until {closehour} come visit us and order online.{" "}
+          </p>
+          <button className="btn">Order </button>
         </div>
       )}
     </footer>
