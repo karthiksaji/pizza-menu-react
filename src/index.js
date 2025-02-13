@@ -73,41 +73,52 @@ function Menu() {
   return (
     <main className="menu">
       <h2>OUR MENU</h2>
+
       {pizzaNum > 0 ? (
-        <ul className="pizzas">
-          {pizzaData.map((pizza) => (
-            <Pizza pizzaObj={pizza} key={pizza.name} />
-          ))}
-        </ul>
+        <>
+          <p>
+            Authentic Italian pizza made with love and passion. We have a total
+            of 6 dishes on our menu.all organic and fresh ingredients.
+          </p>
+
+          <ul className="pizzas">
+            {pizzaData.map((pizza) => (
+              <Pizza pizzaObj={pizza} key={pizza.name} />
+            ))}
+          </ul>
+        </>
       ) : (
         <p>We are still working for our menu. Please comeback later.</p>
       )}
       {/* <Pizza
-        name="Pizza Spinaci"
-        ingredient="Tomato, mozarella, spinach, and ricotta cheese"
-        photoName="pizzas/spinaci.jpg"
-        price={10}
-      />
-      <Pizza
-        name="Pizza Funghi"
-        ingredient="Tomato, mozarella, mushrooms, and onion"
-        photoName="pizzas/funghi.jpg"
-        price={100}
-      /> */}
+name="Pizza Spinaci"
+ingredient="Tomato, mozarella, spinach, and ricotta cheese"
+photoName="pizzas/spinaci.jpg"
+price={10}
+/>
+<Pizza
+name="Pizza Funghi"
+ingredient="Tomato, mozarella, mushrooms, and onion"
+photoName="pizzas/funghi.jpg"
+price={100}
+/> */}
     </main>
   );
 }
 
-function Pizza(props) {
-  if (props.pizzaObj.soldOut) return null;
+function Pizza({ pizzaObj }) {
+  // if (pizzaObj.soldOut) return null;
 
   return (
-    <li className="pizza">
-      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+    <li className={`pizza ${pizzaObj.soldOut ? "sold-out" : ""}`}>
+      <img src={pizzaObj.photoName} alt={pizzaObj.name} />
       <div>
-        <h2>{props.pizzaObj.name}</h2>
-        <p>{props.pizzaObj.ingredients}</p>
-        <span>{props.pizzaObj.price}</span>
+        <h2>{pizzaObj.name}</h2>
+        <p>{pizzaObj.ingredients}</p>
+        {/* {pizzaObj.soldOut ? <span>SOLD OUT</span> : <span>pizzaObj.price</span>} */}
+        <span>
+          {pizzaObj.soldOut ? "SOLD OUT" : `Price: ${pizzaObj.price}`}
+        </span>
       </div>
     </li>
   );
@@ -128,12 +139,7 @@ function Footer() {
   return (
     <footer className="footer">
       {isOpen ? (
-        <div className="order">
-          <p>
-            © We are open until {closehour} come visit us and order online.{" "}
-          </p>
-          <button className="btn">Order </button>
-        </div>
+        <Order closehour={closehour} />
       ) : (
         <p className="order">
           © We are Happy to welcome you here between {openhour} and {closehour}{" "}
@@ -143,6 +149,17 @@ function Footer() {
     </footer>
   );
   // return React.createElement("footer", null, "© We are currently Open");
+}
+
+function Order(props) {
+  return (
+    <div className="order">
+      <p>
+        © We are open until {props.closehour}:00 come visit us and order online.{" "}
+      </p>
+      <button className="btn">Order </button>
+    </div>
+  );
 }
 
 const root = ReactDom.createRoot(document.getElementById("root"));
